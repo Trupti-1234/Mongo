@@ -4,6 +4,8 @@ const studentSchema = mongoose.Schema({
     name:String,
     email:String,
     branch:String,
+    phone: String,
     sem:Number
+    
 });
 module.exports = mongoose.model("Student",studentSchema)

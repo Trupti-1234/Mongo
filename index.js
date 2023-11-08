@@ -3,8 +3,9 @@ const Student = require("./models/studentModel");
 const app = express();
 const Faculty = require("./models/facultyModel")
 const PORT = 5000;
-
+const cors =require('cors')
 app.use(express.json())
+app.use(cors())
 require('./db')
 
 app.get("/", (req, res) => {
@@ -43,7 +44,17 @@ app.post("/faculty", async (req, res) => {
     }
 })
 
+app.post("/student", async (req, res) => {
+    try {
+        const data = req.body;
+        const createdStudent = new Student(data);
+        await createdStudent.save();
+        res.send("Student Created")
 
+    } catch (error) {
+        console.log(error)
+    }
+})
 
 //update 
 app.put('/student/:id', async (req, res) => {
